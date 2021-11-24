@@ -1,0 +1,23 @@
+.categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 50px;
+}
+
+.circle {
+  height: 80px;
+  width: 80px;
+  background: lightgray;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+}

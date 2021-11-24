@@ -1,0 +1,74 @@
+.sidebar {
+  flex: 3;
+  margin: 20px;
+  padding-bottom: 30px;
+  background: #fdfbfb;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar_ads {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar_ad {
+  margin: 10px;
+  padding: 5px;
+  width: 80%;
+  border-top: 1px solid #a7a4a4;
+  border-bottom: 1px solid #a7a4a4;
+  color: #222;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+}
+
+.ad_img {
+  width: 50%;
+  margin-top: 15px;
+}
+
+.sidebar_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar_item_title {
+  margin: 10px;
+  padding: 5px;
+  width: 80%;
+  border-top: 1px solid #a7a4a4;
+  border-bottom: 1px solid #a7a4a4;
+  font-family: "Varela Round", sans-serif;
+  font-size: 15px;
+  color: #222;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+}
+
+.popular_list {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.popular_listItem {
+  display: inline-block;
+  margin-top: 15px;
+  cursor: pointer;
+  direction: rtl;
+}
+
+.sidebar_social {
+  margin-top: 15px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
