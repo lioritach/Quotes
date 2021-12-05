@@ -2,13 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Posts from "../Posts/Posts";
 import axios from "axios";
-import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import { useLocation } from "react-router";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/features/userSlice";
 import Pagination from "../Pagination/Pagination";
-import ReactPaginate from "react-paginate";
 
 const NUMBER = 6;
 
@@ -55,24 +51,6 @@ const Home = () => {
           <Pagination totalPages={totalPages} handleClick={handleClick} />
         </>
       )}
-
-      {/* <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      /> */}
-
-      {/* <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
-        disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"}
-      /> */}
     </>
   );
 };
