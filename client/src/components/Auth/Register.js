@@ -3,38 +3,49 @@ import "./Register.css";
 import registerPic from "../../images/register.png";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/features/userSlice";
+import { login, getData } from "../../redux/features/userSlice";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
 
   const handleRegister = async (e) => {
+    setError(false);
     e.preventDefault();
     try {
-      const result = await axios
-        .post("http://localhost:5000/api/auth/register", {
+      const result = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
           username,
-          email,
           password,
+          email,
+        }
+      );
+
+      localStorage.setItem("user", JSON.stringify(result.data));
+      localStorage.setItem("userDB-data", JSON.stringify(result.data));
+
+      dispatch(
+        login({
+          data: result.data,
         })
-        .then(() => {
-          dispatch(
-            login({
-              username: username,
-              email: email,
-              password: password,
-            })
-          );
+      );
+
+      dispatch(
+        getData({
+          DB_data: result.data,
         })
-        .then(() => {
-          window.location.replace("/");
-        })
-        .catch((err) => console.log(err));
-    } catch (error) {
-      console.log(error);
+      );
+
+      window.location.replace("/");
+    } catch (err) {
+      setError(true);
+      setErrorMessage(err.message);
     }
   };
 
@@ -80,7 +91,10 @@ const Register = () => {
               </button>
             </form>
             <span>נרשמתם כבר?</span>
-            <span className="register">התחברו כעת</span>
+            <Link to="/login" className="link">
+              <span className="register">התחברו כעת</span>
+            </Link>
+            <span>{error ? errorMessage : null}</span>
           </div>
         </div>
       </div>

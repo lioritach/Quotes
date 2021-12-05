@@ -10,10 +10,6 @@
   object-fit: cover;
 }
 
-.form_write {
-  /* position: relative; */
-}
-
 .form_write_sections {
   margin-right: 150px;
   display: flex;

@@ -5,36 +5,74 @@ import axios from "axios";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/features/userSlice";
+import Pagination from "../Pagination/Pagination";
+import ReactPaginate from "react-paginate";
+
+const NUMBER = 6;
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  const { search } = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("user");
-  //   console.log("is logged in", loggedInUser);
-  //   if (loggedInUser) {
-  //     const foundUser = JSON.parse(loggedInUser);
-  //     console.log("is logged in", foundUser);
-  //   }
-  // }, []);
+  const { search } = useLocation();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("http://localhost:5000/api/posts" + search);
+      setLoading(true);
+      const res = await axios.get("/posts/" + search);
+      setLoading(false);
+      console.log(res.data);
       setPosts(res.data);
+
+      setTotalPages(Math.ceil(res.data.length / NUMBER));
     };
 
     fetchPosts();
   }, [search]);
 
+  const handleClick = (num) => {
+    setPage(num);
+  };
+
   return (
     <>
-      <Header />
-      <div className="home">
-        <Posts posts={posts} />
-        <Sidebar />
-      </div>
+      <p>
+        עמוד {page} מתוך {totalPages}
+      </p>
+      {loading ? (
+        <p>Loading ... </p>
+      ) : (
+        <>
+          <div className="home">
+            <Posts posts={posts} page={page} />
+
+            <Sidebar />
+          </div>
+          <Pagination totalPages={totalPages} handleClick={handleClick} />
+        </>
+      )}
+
+      {/* <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      /> */}
+
+      {/* <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName={"paginationBttns"}
+        previousLinkClassName={"previousBttn"}
+        nextLinkClassName={"nextBttn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
+      /> */}
     </>
   );
 };

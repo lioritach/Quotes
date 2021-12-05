@@ -9,8 +9,12 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Categories from "./components/Categories/Categories";
 import Contact from "./components/Contact-Us/Contact";
+import { useSelector } from "react-redux";
+import { selectUser } from "./redux/features/userSlice";
 
 function App() {
+  const user = useSelector(selectUser);
+
   return (
     <Router>
       <Navbar />
@@ -19,16 +23,16 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/login">
-          <Login />
+          {user ? <Home /> : <Login />}
         </Route>
         <Route exact path="/register">
-          <Register />
+          {user ? <Home /> : <Register />}
         </Route>
         <Route exact path="/profile">
-          <Profile />
+          {user ? <Profile /> : <Home />}
         </Route>
         <Route exact path="/writepost">
-          <WritePost />
+          {user ? <WritePost /> : <Home />}
         </Route>
         <Route exact path="/post/:postId">
           <SinglePage />

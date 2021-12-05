@@ -39,8 +39,7 @@ const Contact = () => {
     <form ref={form} onSubmit={sendEmail}>
       <div className="contact">
         <div className="contact-box">
-          <h1>צרו קשר</h1>
-
+          <h1 className="contact-title">צרו קשר</h1>
           <input
             type="text"
             name="fullName"

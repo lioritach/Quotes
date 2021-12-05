@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import axios from "axios";
 
 const Sidebar = () => {
+  const [popular, setPopular] = useState([]);
+
+  useEffect(() => {
+    const getPopular = async () => {
+      const res = await axios.get("/posts");
+      setPopular(res.data);
+    };
+
+    getPopular();
+  }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebar_ads">
@@ -17,17 +29,9 @@ const Sidebar = () => {
       <div className="sidebar_item">
         <span className="sidebar_item_title">פוסטים מומלצים</span>
         <ul className="popular_list">
-          <li className="popular_listItem">150 סיבות למה אני אוהב/ת אותך!</li>
-          <li className="popular_listItem">
-            5 סימנים שהאקס שלך מתחרט על זה שנפרדתם
-          </li>
-          <li className="popular_listItem">
-            אם היא עושה את 11 הדברים האלו מבלי שתבקש אפילו, אתה בהחלט זכית באישה
-            לחיים
-          </li>
-          <li className="popular_listItem">
-            5 דברים מה לא לעשות כשהאקס שולח הודעה
-          </li>
+          {popular.map((post) => (
+            <li className="popular_listItem">{post.title}</li>
+          ))}
         </ul>
       </div>
 

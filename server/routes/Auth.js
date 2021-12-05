@@ -25,7 +25,7 @@ router.post("/login", async (req, res) => {
 
     // If everything is ok
     const token = jwt.sign(
-      { id: user._id, username: user.username },
+      { id: user._id, username: user.username, profilePic: user.profileImage },
       JWT_SECRET
     );
 
@@ -43,14 +43,13 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-    const newUser = new User({
+    const newUser = await User.create({
       username: req.body.username,
       email: req.body.email,
       password: hashPassword,
     });
 
-    const savedUser = await newUser.save();
-    res.status(200).json(savedUser);
+    res.status(200).json(newUser);
   } catch (err) {
     return res.status(500).json(err);
   }

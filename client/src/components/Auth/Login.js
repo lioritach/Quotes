@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import LoginPic from "../../images/login.png";
 import { login, selectUser } from "../../redux/features/userSlice";
 import "./Login.css";
 
 const Login = () => {
-  const [username, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
@@ -15,22 +16,25 @@ const Login = () => {
   const HandleLogin = async (e) => {
     setError(false);
     e.preventDefault();
-    const result = await axios
-      .post("http://localhost:5000/api/auth/login", {
+
+    try {
+      const result = await axios.post("http://localhost:5000/api/auth/login", {
         username,
         password,
-      })
-      .then(() => {
-        dispatch(
-          login({
-            username: username,
-            password: password,
-          })
-        );
-        localStorage.setItem("user", user);
-        console.log(user);
-      })
-      .catch((error) => setError(true));
+      });
+
+      localStorage.setItem("user", JSON.stringify(result.data));
+
+      dispatch(
+        login({
+          data: result.data,
+        })
+      );
+
+      window.location.replace("/");
+    } catch (err) {
+      setError(err);
+    }
   };
 
   return (
@@ -52,9 +56,9 @@ const Login = () => {
             <form className="loginForm">
               <label>מייל</label>
               <input
-                type="email"
-                placeholder="מייל"
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                placeholder="שם משתמש"
+                onChange={(e) => setUsername(e.target.value)}
                 value={username}
               />
 
@@ -71,7 +75,9 @@ const Login = () => {
               </button>
             </form>
             <span>אין לכם משתמש?</span>
-            <span className="register"> הרשמו כעת</span>
+            <Link to="/register" className="link">
+              <span className="register"> הרשמו כעת</span>
+            </Link>
             <div>{error ? "שגיאה" : null}</div>
           </div>
         </div>

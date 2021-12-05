@@ -2,10 +2,17 @@ import React from "react";
 import Post from "../Post/Post";
 import "./Posts.css";
 
-const Posts = ({ posts }) => {
+const NUMBER = 6;
+
+const Posts = ({ posts, page }) => {
+  const startIndex = (page - 1) * NUMBER;
+  const selectedPosts = posts.slice(startIndex, startIndex + NUMBER);
+
+  console.log(page);
+
   return (
     <div className="posts">
-      {posts.map((post) => (
+      {selectedPosts.map((post) => (
         <Post post={post} />
       ))}
     </div>

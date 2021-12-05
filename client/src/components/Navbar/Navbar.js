@@ -2,12 +2,23 @@ import React from "react";
 import "./Navbar.css";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "../../redux/features/userSlice";
 
 const Navbar = () => {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const logOut = () => {
+    dispatch(logout());
+    window.location.replace("/");
+    localStorage.removeItem("user");
+  };
+
+  console.log(user.data);
 
   return (
     <div className="navbar">
@@ -54,25 +65,36 @@ const Navbar = () => {
               </Link>
             ) : null}
           </li>
-          <li className="navbar__listItem">
-            {user ? (
-              "התנתק"
-            ) : (
-              <Link to="/login" className="link">
-                התחבר
-              </Link>
-            )}
-          </li>
         </ul>
       </div>
       <div className="navbar__right">
         {user ? (
-          <img
-            className="profileImage"
-            src="https://scontent.ftlv6-1.fna.fbcdn.net/v/t1.6435-9/129514038_10207734468877710_1572784873397214480_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=x4FW00XGmvgAX85xajI&_nc_ht=scontent.ftlv6-1.fna&oh=2c409e3cc12bd0def7e06686edf8d539&oe=61C20C9B"
-            alt="profile"
-          />
-        ) : null}
+          <>
+            {user.data.profileImage ? (
+              <img
+                className="profileImage"
+                src={user.data.profileImage}
+                alt="profile"
+              />
+            ) : (
+              <AccountCircleIcon />
+            )}
+
+            <span className="hello">שלום, {user.data.username}</span>
+            <span className="navbar__listItem logout" onClick={logOut}>
+              התנתק/י
+            </span>
+            <Link to="/profile" className="link">
+              <span className="settingsIcon">
+                <SettingsIcon />
+              </span>
+            </Link>
+          </>
+        ) : (
+          <Link to="/login" className="link">
+            התחבר
+          </Link>
+        )}
       </div>
     </div>
   );

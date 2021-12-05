@@ -1,23 +1,10 @@
 .header {
-  margin-top: 60px;
-}
-
-.header__titles {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #444;
-}
-
-.title {
-  position: absolute;
-  top: 18%;
-  font-size: 20px;
+  margin-top: 40px;
 }
 
 .header__img {
   width: 100%;
-  height: 450px;
+  height: 350px;
   margin-bottom: 20px;
   object-fit: cover;
 }

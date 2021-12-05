@@ -5,12 +5,6 @@ import userReducer from "./features/userSlice";
 import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 
-// export default configureStore({
-//   reducer: {
-//     user: userReducer,
-//   },
-// });
-
 const reducers = combineReducers({
   user: userReducer,
 });

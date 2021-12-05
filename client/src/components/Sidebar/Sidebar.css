@@ -59,9 +59,10 @@
 }
 
 .popular_listItem {
-  display: inline-block;
-  margin-top: 15px;
+  display: flex;
+  margin-top: 5px;
   cursor: pointer;
+  justify-content: center;
   direction: rtl;
 }
 
