@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Categories.css";
-import Love from "../../images/couple.png";
-import smart from "../../images/smart.png";
-import motivation from "../../images/motivation.png";
-import faith from "../../images/faith.png";
-import didyouknow from "../../images/didyouknow.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -24,7 +19,9 @@ const Categories = () => {
 
   useEffect(() => {
     const getCats = async () => {
+      setLoading(true);
       const res = await axios.get("/categories");
+      setLoading(false);
       setCats(res.data);
     };
     getCats();
@@ -36,7 +33,11 @@ const Categories = () => {
       <h1 className="categories-title">קטגוריות</h1>
 
       <div className="container">
-        {cats && cats.map((category) => <Createcards title={category.name} />)}
+        {loading ? (
+          <p>טוען נתונים ... </p>
+        ) : (
+          cats && cats.map((category) => <Createcards title={category.name} />)
+        )}
       </div>
     </div>
   );

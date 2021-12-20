@@ -1,6 +1,8 @@
 import "../src/App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "./redux/features/userSlice";
 import Home from "./components/Home/Home";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import SinglePage from "./components/SinglePage/SinglePage";
 import WritePost from "./pages/write/WritePost";
@@ -9,8 +11,6 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Categories from "./components/Categories/Categories";
 import Contact from "./components/Contact-Us/Contact";
-import { useSelector } from "react-redux";
-import { selectUser } from "./redux/features/userSlice";
 
 function App() {
   const user = useSelector(selectUser);

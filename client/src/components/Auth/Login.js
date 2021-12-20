@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import LoginPic from "../../images/login.png";
-import { login, selectUser } from "../../redux/features/userSlice";
+import { login } from "../../redux/features/userSlice";
 import "./Login.css";
 
 const Login = () => {
@@ -11,7 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
 
   const HandleLogin = async (e) => {
     setError(false);
