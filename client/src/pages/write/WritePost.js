@@ -22,7 +22,7 @@ const WritePost = () => {
     e.preventDefault();
 
     const newPost = {
-      username: user.data.username,
+      username: user.data.username || user.data.givenName,
       title,
       description,
       photo: null,
@@ -33,6 +33,7 @@ const WritePost = () => {
       const filename = Date.now() + file.name;
       data.append("name", filename);
       data.append("file", file);
+      console.log("data write", data);
       newPost.photo = filename;
 
       try {

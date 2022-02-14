@@ -56,6 +56,7 @@
 .popular_list {
   list-style: none;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .popular_listItem {
@@ -64,6 +65,7 @@
   cursor: pointer;
   justify-content: center;
   direction: rtl;
+  align-content: center;
 }
 
 .sidebar_social {

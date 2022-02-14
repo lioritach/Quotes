@@ -8,8 +8,6 @@ const Posts = ({ posts, page }) => {
   const startIndex = (page - 1) * NUMBER;
   const selectedPosts = posts.slice(startIndex, startIndex + NUMBER);
 
-  console.log(page);
-
   return (
     <div className="posts">
       {selectedPosts.map((post) => (

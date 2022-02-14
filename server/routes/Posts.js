@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
-    console.log("object");
+
     res.status(200).json(savedPost);
   } catch (error) {
     res.status(500).json(error);
@@ -18,7 +18,6 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    console.log(post);
     res.status(200).json(post);
   } catch (error) {
     res.status(500).json(error);
@@ -36,8 +35,10 @@ router.put("/:id", async (req, res) => {
           {
             $set: req.body,
           },
+
           { new: true }
         );
+        console.log(editPost);
         res.status(200).json(editPost);
       } catch (error) {
         res.status(500).json(error);

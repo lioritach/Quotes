@@ -55,33 +55,6 @@ const Post = ({ post }) => {
         </div>
       </div>
     </div>
-    // <div className="post">
-    //   {post.photo && (
-    //     <figure className="hover-rotate">
-    //       <img
-    //         src={photoURL + post.photo}
-    //         className="post-image"
-    //         alt="mishpatimyafim"
-    //       />
-    //     </figure>
-    //   )}
-
-    //   <div className="postInfo">
-    //     <div className="postTags">
-    //       {post.categories.map((category) => (
-    //         <span className="postTag">{category}</span>
-    //       ))}
-    //     </div>
-    //     <Link to={`/post/${post._id}`} className="link">
-    //       <span className="postTitle">{post.title}</span>
-    //     </Link>
-    //     <hr />
-    //     <span className="postDate">
-    //       {new Date(post.createdAt).toDateString()}
-    //     </span>
-    //   </div>
-    //   <p className="postDescription">{post.description}</p>
-    // </div>
   );
 };
 

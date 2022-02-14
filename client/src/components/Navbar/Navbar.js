@@ -6,19 +6,17 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectUser } from "../../redux/features/userSlice";
+import { logout, selectUser, userDBData } from "../../redux/features/userSlice";
 
 const Navbar = () => {
-  const user = useSelector(selectUser);
+  const user = useSelector(userDBData);
   const dispatch = useDispatch();
 
   const logOut = () => {
     dispatch(logout());
     window.location.replace("/");
-    localStorage.removeItem("user");
+    localStorage.clear();
   };
-
-  console.log(user.data);
 
   return (
     <div className="navbar">
@@ -70,25 +68,29 @@ const Navbar = () => {
       <div className="navbar__right">
         {user ? (
           <>
-            {user.data.profileImage ? (
+            {user.data.profileImage || user.data.imageUrl ? (
               <img
                 className="profileImage"
-                src={user.data.profileImage}
+                src={user.data.profileImage || user.data.imageUrl}
                 alt="profile"
               />
             ) : (
               <AccountCircleIcon />
             )}
 
-            <span className="hello">שלום, {user.data.username}</span>
+            <span className="hello">
+              שלום, {user.data.username || user.data.givenName}
+            </span>
             <span className="navbar__listItem logout" onClick={logOut}>
               התנתק/י
             </span>
-            <Link to="/profile" className="link">
-              <span className="settingsIcon">
-                <SettingsIcon />
-              </span>
-            </Link>
+            {user.data.username ? (
+              <Link to="/profile" className="link">
+                <span className="settingsIcon">
+                  <SettingsIcon />
+                </span>
+              </Link>
+            ) : null}
           </>
         ) : (
           <Link to="/login" className="link">

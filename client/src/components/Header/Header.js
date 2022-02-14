@@ -1,15 +1,50 @@
 import React from "react";
+import Carousel from "react-elastic-carousel";
 import "./Header.css";
 
 const Header = () => {
+  const breakPoints = [
+    { width: 200, items: 1 },
+    { width: 550, items: 2 },
+    { width: 768, items: 3 },
+    { width: 1200, items: 4 },
+  ];
+
   return (
-    <div className="header">
-      <img
-        className="header__img"
-        src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0,176,3008,1654&wid=4000&hei=2200&scl=0.752"
-        alt="mishpatimyafim"
-      />
-    </div>
+    <>
+      <div className="header">
+        <Carousel breakPoints={breakPoints} itemsToShow={3}>
+          <div className="item">
+            <img
+              className="img"
+              src="https://jooinn.com/images/scenic-view-of-sea-against-sky-at-sunset-4.jpg"
+              alt=""
+            />
+          </div>
+          <div className="item">
+            <img
+              className="img"
+              src="https://jooinn.com/images/scenic-view-of-sea-against-sky-at-sunset-4.jpg"
+              alt=""
+            />
+          </div>
+          <div className="item">
+            <img
+              className="img"
+              src="https://jooinn.com/images/scenic-view-of-sea-against-sky-at-sunset-4.jpg"
+              alt=""
+            />
+          </div>
+          <div className="item">
+            <img
+              className="img"
+              src="https://jooinn.com/images/scenic-view-of-sea-against-sky-at-sunset-4.jpg"
+              alt=""
+            />
+          </div>
+        </Carousel>
+      </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 import LoginPic from "../../images/login.png";
 import { login } from "../../redux/features/userSlice";
@@ -33,6 +34,21 @@ const Login = () => {
       window.location.replace("/");
     } catch (err) {
       setError(err);
+    }
+  };
+
+  const responseGoogle = (response) => {
+    try {
+      localStorage.setItem("user", JSON.stringify(response.profileObj));
+
+      dispatch(
+        login({
+          data: response.profileObj,
+        })
+      );
+      window.location.replace("/");
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -78,6 +94,23 @@ const Login = () => {
               <span className="register"> הרשמו כעת</span>
             </Link>
             <div>{error ? "שגיאה" : null}</div>
+          </div>
+          <div>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_AUTH}
+              render={(renderProps) => (
+                <button
+                  type="button"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  התחברו עם גוגל
+                </button>
+              )}
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy="single_host_origin"
+            />
           </div>
         </div>
       </div>

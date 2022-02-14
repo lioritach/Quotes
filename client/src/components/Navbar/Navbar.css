@@ -22,6 +22,7 @@
   margin-right: 20px;
   cursor: pointer;
   font-family: "Roboto Slab", serif;
+  margin-bottom: 22px;
 }
 
 .navbar__center {
@@ -90,6 +91,7 @@
   margin-right: 10px;
   color: #444;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 .profileImage {

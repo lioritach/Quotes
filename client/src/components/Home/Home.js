@@ -5,6 +5,7 @@ import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import { useLocation } from "react-router";
 import Pagination from "../Pagination/Pagination";
+import Header from "../Header/Header";
 
 const NUMBER = 6;
 
@@ -13,7 +14,6 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
   const { search } = useLocation();
 
   useEffect(() => {
@@ -21,9 +21,7 @@ const Home = () => {
       setLoading(true);
       const res = await axios.get("/posts/" + search);
       setLoading(false);
-      console.log(res.data);
       setPosts(res.data);
-
       setTotalPages(Math.ceil(res.data.length / NUMBER));
     };
 
@@ -36,6 +34,7 @@ const Home = () => {
 
   return (
     <>
+      <Header />
       <p>
         עמוד {page} מתוך {totalPages}
       </p>
